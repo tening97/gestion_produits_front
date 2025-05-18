@@ -1,0 +1,308 @@
+<!-- Style CSS à ajouter dans le fichier .css du composant ou styles.css global -->
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 0;
+    margin-bottom: 40px;
+    color: white;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .card {
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    height: 100%;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+  }
+
+  .card-text {
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #3a3a3a;
+  }
+
+  .btn-primary {
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(to right, #3a3f9e, #7176e3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 84, 200, 0.4);
+  }
+
+  .btn-edit {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+  }
+
+  .btn-edit:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+  }
+
+  .btn-danger {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+  }
+
+  .btn-danger:hover {
+    background: linear-gradient(to right, #e63a61, #e6432a);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+  }
+
+  .btn-icon {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .badge-sale {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    padding: 6px 12px;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    color: white;
+  }
+
+  .stock-status {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .in-stock {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .low-stock {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .out-stock {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .product-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .filters {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  }
+</style>
+
+<!-- HTML du composant de liste des produits -->
+<div class="container mt-4">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Catalogue des Produits</h1>
+      <p class="lead mb-4">Gérez facilement tous vos produits</p>
+      <div class="d-flex justify-content-center gap-3">
+        <button class="btn btn-light btn-lg px-4" routerLink="/add-produit">
+          <i class="fas fa-plus me-2"></i>Ajouter un produit
+        </button>
+        <button class="btn btn-outline-light btn-lg px-4">
+          <i class="fas fa-filter me-2"></i>Filtrer
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtres optionnels -->
+  <div class="filters">
+    <div class="row">
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Catégorie</label>
+        <select class="form-select">
+          <option selected>Toutes les catégories</option>
+          <option>Électronique</option>
+          <option>Mode</option>
+          <option>Maison</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Prix</label>
+        <select class="form-select">
+          <option selected>Tous les prix</option>
+          <option>Moins de 20€</option>
+          <option>20€ - 50€</option>
+          <option>Plus de 50€</option>
+        </select>
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button class="btn btn-primary w-100">
+          <i class="fas fa-filter me-2"></i>Appliquer les filtres
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Titre et bouton ajout -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold"><i class="fas fa-box me-2 text-primary"></i>Liste des produits</h2>
+    <button class="btn btn-success" routerLink="/add-produit">
+      <i class="fas fa-plus me-2"></i>Ajouter un produit
+    </button>
+  </div>
+
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+    @for (produit of produits; track produit) {
+      <div class="col">
+        <div class="card h-100">
+          <!-- Badge optionnel conditionnel -->
+          @if (produit.promotion) {
+            <span class="badge-sale">{{produit.promotion}}</span>
+          }
+
+          <!-- Image du produit -->
+          <img [src]="getImageUrl(produit.imagePath)" class="card-img-top" alt="{{produit.nom}}">
+
+          <div class="card-body">
+            <!-- Statut du stock (optionnel) -->
+            @if (produit.quantite > 10) {
+              <span class="stock-status in-stock"><i class="fas fa-check-circle me-1"></i>En stock</span>
+            } @else if (produit.quantite > 0) {
+              <span class="stock-status low-stock"><i class="fas fa-exclamation-circle me-1"></i>Stock limité</span>
+            } @else {
+              <span class="stock-status out-stock"><i class="fas fa-times-circle me-1"></i>Rupture de stock</span>
+            }
+
+            <!-- Titre et description -->
+            <h5 class="card-title">{{produit.nom}}</h5>
+            <p class="card-text">{{produit.description}}</p>
+
+            <!-- Prix -->
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <!-- Prix barré si en promotion -->
+                @if (produit.ancien_prix) {
+                  <span class="text-muted text-decoration-line-through me-2">{{produit.ancien_prix | currency:'XOF' :'symbol-narrow' }}</span>
+                }
+                <span class="price">{{produit.prix | prixCfa}}</span>
+              </div>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="product-actions">
+              <!-- Bouton d'ajout au panier / alerte -->
+              @if (produit.quantite > 0) {
+                <button class="btn btn-primary flex-grow-1">
+                  <i class="fas fa-shopping-cart me-1"></i>Ajouter au panier
+                </button>
+              } @else {
+                <button class="btn btn-primary flex-grow-1" disabled>
+                  <i class="fas fa-bell me-1"></i>M'alerter
+                </button>
+              }
+
+              <!-- Boutons d'édition et suppression -->
+              <button class="btn btn-edit btn-icon" [routerLink]="['/add-produit', produit.id, 'edit']" >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-danger btn-icon" (click)="supprimerProduit(produit.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (produits.length === 0) {
+    <div class="alert alert-info text-center p-5 mt-4">
+      <i class="fas fa-box-open fa-3x mb-3"></i>
+      <h3>Aucun produit disponible</h3>
+      <p>Commencez par ajouter des produits à votre catalogue.</p>
+      <button class="btn btn-primary mt-3" routerLink="/add-produit">
+        <i class="fas fa-plus me-2"></i>Ajouter un produit
+      </button>
+    </div>
+  }
+  @if (produits.length > 0) {
+    <nav class="mt-5">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" href="#" (click)="pagePrecedente()">Précédent</a>
+        </li>
+        @for (page of pages; track page) {
+          <li class="page-item" [class.active]="currentPage === page">
+            <a class="page-link" href="#" (click)="changerPage(page)">{{page}}</a>
+          </li>
+        }
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" href="#" (click)="pageSuivante()">Suivant</a>
+        </li>
+      </ul>
+    </nav>
+  }
+</div>
+
